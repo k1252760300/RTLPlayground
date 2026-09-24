@@ -8,8 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: debian:trixie
     steps:
       - uses: actions/checkout@v6
         with:
@@ -17,8 +15,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          apt update
-          apt install make gcc sdcc xxd python-is-python3 libjson-c-dev zlib1g-dev -y
+          sudo apt update
+          sudo apt install make gcc sdcc xxd python3 libjson-c-dev zlib1g-dev -y
 
       - name: Run the host‑side unit tests
         run: make -C test
@@ -28,6 +26,9 @@ jobs:
 
       - name: Build main firmware FG_4GT_2SX_V2_0
         run: make clean && make CI=1 MACHINE="FG_4GT_2SX_V2_0"
+
+      - name: List output dir for debug
+        run: ls -la output/FG_4GT_2SX_V2_0/
 
       - name: Upload hex artifacts
         uses: actions/upload-artifact@v4
