@@ -23,6 +23,6 @@ jobs:
       - name: Check if machine.c can be compiled for all machines
         run: make machine_check
       - name: Make project (4x2/RTL8372)
-        run: make CI=1 MACHINE="FG-4GT-2SX_V2.0"
+        run: make CI=1 MACHINE="FG_4GT_2SX_V2_0"
       - name: Make project with the health instrumentation
-        run: make clean && make CI=1 MACHINE="FG-4GT-2SX_V2.0" HEALTH=1
+        run: make clean && make CI=1 MACHINE="FG_4GT_2SX_V2_0" HEALTH=1
