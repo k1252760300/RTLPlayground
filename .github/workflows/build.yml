@@ -12,14 +12,16 @@ jobs:
       image: debian:trixie
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Install dependencies
         run: |
           apt update
           apt install make gcc sdcc xxd python-is-python3 libjson-c-dev zlib1g-dev -y
 
-      - name: Debug‑List available machines
-        run: ls -1 machines/
+      - name: Debug‑List devices dir
+        run: ls -1 doc/devices/
 
       - name: Run the host‑side unit tests
         run: make -C test
@@ -28,13 +30,13 @@ jobs:
         run: make machine_check
 
       - name: Make project (4x2/RTL8372) FG‑4GT‑2SX_V2.0
-        run: make clean && make CI=1 MACHINE="FG‑4GT‑2SX_V2.0"
+        run: make clean && make CI=1 MACHINE="FG-4GT-2SX_V2.0"
 
       - name: Build installer firmware FG‑4GT‑2SX_V2.0
-        run: cd installer && make clean && make CI=1 MACHINE="FG‑4GT‑2SX_V2.0"
+        run: cd installer && make clean && make CI=1 MACHINE="FG-4GT-2SX_V2.0"
 
       - name: Make project with the health instrumentation
-        run: make clean && make CI=1 MACHINE="FG‑4GT‑2SX_V2.0" HEALTH=1
+        run: make clean && make CI=1 MACHINE="FG-4GT-2SX_V2.0" HEALTH=1
 
       - name: Upload hex artifacts
         uses: actions/upload-artifact@v4
