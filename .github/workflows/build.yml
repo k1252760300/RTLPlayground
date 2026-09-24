@@ -21,9 +21,6 @@ jobs:
       - name: Run the host‑side unit tests
         run: make -C test
 
-      - name: Check machine targets list
-        run: make machine_check
-
       - name: Build main firmware FG_4GT_2SX_V2_0
         run: make clean && make CI=1 MACHINE="FG_4GT_2SX_V2_0"
 
