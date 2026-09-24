@@ -29,13 +29,9 @@ jobs:
       - name: Build main firmware FG_4GT_2SX_V2_0
         run: make clean && make CI=1 MACHINE="FG_4GT_2SX_V2_0"
 
-      - name: Build installer firmware
-        run: cd installer && make clean && make CI=1 MACHINE="FG_4GT_2SX_V2_0"
-
       - name: Upload hex artifacts
         uses: actions/upload-artifact@v4
         with:
           name: RTLPlayground-FG_4GT_2SX_V2_0
           path: |
             output/FG_4GT_2SX_V2_0/*.hex
-            installer/output/FG_4GT_2SX_V2_0/*.hex
